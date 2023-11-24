@@ -1,0 +1,18 @@
+body{
+    background-color: black;
+    color: white;
+}
+.item-details {
+    max-height: 50px;
+    overflow: hidden;
+
+}
+
+.item-details.expanded {
+    max-height: none;
+}
+
+.read_more {
+    cursor: pointer;
+    color: black;
+}

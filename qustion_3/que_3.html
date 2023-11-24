@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+        <button type="button" onclick="addStudent()">Add Student</button>
+    </form>
+<br>
+    <table id="studentTable" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
+
+    <form id="editForm">
+        <label for="editName">Edit Name:</label>
+        <input type="text" id="editName" name="editName" required>
+        <label for="editAge">Edit Age:</label>
+        <input type="number" id="editAge" name="editAge" required>
+        <button type="button" onclick="updateStudent()">Update</button>
+    </form>
+
+    <script>
+        function addStudent() {
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+
+            var table = document.getElementById('studentTable');
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = name;
+            cell2.innerHTML = age;
+            cell3.innerHTML = '<button onclick="deleteRow(this)">Delete</button>' +
+                              '<button onclick="editRow(this)">Edit</button>';
+        }
+
+        function deleteRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function editRow(btn) {
+            var row = btn.parentNode.parentNode;
+            var cells = row.getElementsByTagName('td');
+
+            document.getElementById('editName').value = cells[0].innerHTML;
+            document.getElementById('editAge').value = cells[1].innerHTML;
+
+            document.getElementById('editForm').style.display = 'block';
+        }
+
+        function updateStudent() {
+            var editedName = document.getElementById('editName').value;
+            var editedAge = document.getElementById('editAge').value;
+
+            // Assuming you have a selected row, you can update the values accordingly
+            // For demonstration purposes, let's update the first row
+            var table = document.getElementById('studentTable');
+            var cells = table.rows[1].getElementsByTagName('td');
+
+            cells[0].innerHTML = editedName;
+            cells[1].innerHTML = editedAge;
+
+            document.getElementById('editForm').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
